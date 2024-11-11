@@ -1,0 +1,62 @@
+# Random Sampling and Sampling Distribution
+# 230701016
+# M. Aishwarya
+# 10.09.2024
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+population_mean = 50
+population_std = 10
+population_size = 100000
+population = np.random.normal(population_mean, population_std, population_size)
+
+
+plt.figure(figsize=(8, 5))
+plt.hist(population, bins=50, color='skyblue', edgecolor='black', alpha=0.7)
+plt.title('Population Distribution')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.axvline(population_mean, color='red', linestyle='dashed', linewidth=1.5, label='Population Mean')
+plt.legend()
+plt.show()
+
+
+sample_sizes = [30, 50, 100]  
+num_samples = 1000 
+sample_means = {}
+
+for size in sample_sizes:
+    sample_means[size] = []
+    for _ in range(num_samples):
+        sample = np.random.choice(population, size=size, replace=False)
+        sample_means[size].append(np.mean(sample))
+
+
+plt.figure(figsize=(12, 8))
+for i, size in enumerate(sample_sizes):
+    plt.subplot(len(sample_sizes), 1, i + 1)
+    plt.hist(sample_means[size], bins=30, alpha=0.7, color='orange', edgecolor='black',
+             label=f'Sample Size {size}')
+    plt.axvline(np.mean(population), color='red', linestyle='dashed', linewidth=1.5, label='Population Mean')
+    plt.title(f'Sampling Distribution of the Sample Mean (Sample Size {size})')
+    plt.xlabel('Sample Mean')
+    plt.ylabel('Frequency')
+    plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(12, 8))
+for i, size in enumerate(sample_sizes):
+    plt.subplot(len(sample_sizes), 1, i + 1)
+    plt.hist(sample_means[size], bins=30, alpha=0.7, color='purple', edgecolor='black',
+             label=f'Sample Size {size}', density=True)
+    plt.axvline(np.mean(population), color='red', linestyle='dashed', linewidth=1.5, label='Population Mean')
+    plt.title(f'Sampling Distribution (Sample Size {size}) - CLT Demonstration')
+    plt.xlabel('Sample Mean')
+    plt.ylabel('Density')
+    plt.legend()
+
+plt.tight_layout()
+plt.show()

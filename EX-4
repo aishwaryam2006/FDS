@@ -1,1 +1,24 @@
+# Data Preprocessing
+# 230701016
+# M. Aishwarya
+# 27.08.2024
+
+import numpy as np
+import pandas as pd
+
+df = pd.read_csv("/content/pre-process_datasample.csv")
+
+df.info()
+
+df.Country.fillna(df.Country.mode()[0], inplace=True)
+df.Age.fillna(df.Age.median(), inplace=True)
+df.Salary.fillna(round(df.Salary.mean()), inplace=True)
+
+encoded_countries = pd.get_dummies(df.Country)
+
+updated_dataset = pd.concat([encoded_countries, df.iloc[:, [1, 2, 3]]], axis=1)
+
+updated_dataset.Purchased.replace(['No', 'Yes'], [0, 1], inplace=True)
+
+print(updated_dataset)
 

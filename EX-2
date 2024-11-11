@@ -1,1 +1,57 @@
+# Outlier detection
+# 230701016
+# M. Aishwarya
+# 13.08.2024
+
+
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+array = np.random.randint(1, 100, 16)
+
+print(array)
+
+print(array.mean())
+
+print(np.percentile(array, 25))  
+print(np.percentile(array, 50)) 
+print(np.percentile(array, 75))  
+print(np.percentile(array, 100))
+
+def outDetection(array):
+    sorted_array = sorted(array)
+    Q1, Q3 = np.percentile(array, [25, 75])
+    IQR = Q3 - Q1
+
+    lr = Q1 - (1.5 * IQR)
+    ur = Q3 + (1.5 * IQR)
+    
+    return lr, ur
+
+
+lr, ur = outDetection(array)
+print(f"Lower Range: {lr}, Upper Range: {ur}")
+
+sns.displot(array)
+plt.show()
+
+new_array = array[(array > lr) & (array < ur)]
+print("Array after outlier removal:", new_array)
+
+
+sns.displot(new_array)
+plt.show()
+
+
+lr1, ur1 = outDetection(new_array)
+print(f"New Lower Range: {lr1}, New Upper Range: {ur1}")
+
+
+final_array = new_array[(new_array > lr1) & (new_array < ur1)]
+print("Final array after second outlier removal:", final_array)
+
+sns.displot(final_array)
+plt.show()
 

@@ -1,0 +1,30 @@
+# Basic Practice Experiments
+# 230701016
+# M. Aishwarya
+# 30.07.2024
+
+import pandas as pd
+import matplotlib.pyplot as plt
+data = {&#39;Year&#39;: list(range(2010, 2021)),
+&#39;Job Postings&#39;: [150, 300, 450, 600, 800, 1200, 1600, 2100, 2700, 3400, 4200]}
+df = pd.DataFrame(data)
+plt.plot(df[&#39;Year&#39;], df[&#39;Job Postings&#39;], marker=&#39;o&#39;)
+plt.title(&#39;Trend of Data Science Job Postings&#39;)
+plt.xlabel(&#39;Year&#39;)
+plt.ylabel(&#39;Number of Job Postings&#39;)
+plt.show()
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+roles=[&#39;data scientist&#39;,&#39;data analyst&#39;,&#39;data engineer&#39;,&#39;ml engineer&#39;,&#39;business analyst&#39;]
+counts=[300,500,450,200,150]
+plt.bar(roles,counts,width=0.5,color=&#39;yellow&#39;)
+plt.title(&#39;distributive of data science roles&#39;)
+plt.xlabel(&#39;roles&#39;)
+plt.ylabel(&#39;counts&#39;)
+plt.show()
+
+
+
